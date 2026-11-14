@@ -47,5 +47,3 @@ As correções foram isoladas em commits separados na branch `staging`:
 - `7553b17` — `fix: gera ID ao abrir chamado sem registros`
 
 A branch foi criada a partir da `main`. O relatório foi adicionado em commit de documentação separado. Após revisar o diff, a branch `staging` foi integrada à `main` no commit `b1caa3c`, e a `main` foi enviada ao repositório remoto.
-
-
