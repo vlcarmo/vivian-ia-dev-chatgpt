@@ -91,11 +91,10 @@ ticketForm.addEventListener("submit", (event) => {
 searchInput.addEventListener("input", renderTicketList);
 
 clearData.addEventListener("click", () => {
-  localStorage.removeItem(STORAGE_KEY);
-  tickets = [...seedTickets];
-  selectedTicketId = tickets[0].id;
+  tickets = [];
+  selectedTicketId = null;
   saveTickets();
-  showToast("Base local restaurada.");
+  showToast("Base local limpa.");
   render();
 });
 
@@ -107,10 +106,27 @@ function loadTickets() {
   }
 
   try {
-    return JSON.parse(stored);
-  } catch {
-    return [...seedTickets];
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed) && parsed.every(isTicket)) {
+      return parsed;
+    }
+
+    console.error("A base local de chamados tem um formato inválido; usando os dados de demonstração.");
+  } catch (error) {
+    console.error("Não foi possível interpretar a base local de chamados; usando os dados de demonstração.", error);
   }
+
+  return [...seedTickets];
+}
+
+function isTicket(ticket) {
+  return ticket !== null &&
+    typeof ticket === "object" &&
+    Number.isFinite(ticket.id) &&
+    ["requester", "email", "category", "priority", "status", "title", "description", "correction", "createdAt", "updatedAt"]
+      .every((field) => typeof ticket[field] === "string") &&
+    Array.isArray(ticket.events) &&
+    ticket.events.every((event) => typeof event === "string");
 }
 
 function saveTickets() {
