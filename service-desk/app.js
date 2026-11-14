@@ -118,7 +118,7 @@ function saveTickets() {
 }
 
 function nextId() {
-  return Math.max(...tickets.map((ticket) => ticket.id)) + 1;
+  return Math.max(1000, ...tickets.map((ticket) => ticket.id)) + 1;
 }
 
 function render() {
@@ -132,7 +132,8 @@ function renderTicketList() {
   const filteredTickets = tickets.filter((ticket) => {
     return (
       String(ticket.id).includes(term) ||
-      ticket.title.toLowerCase().includes(term)
+      ticket.title.toLowerCase().includes(term) ||
+      ticket.requester.toLowerCase().includes(term)
     );
   });
 
@@ -260,6 +261,7 @@ function updateSelectedTicket(ticketId) {
   ticket.updatedAt = new Date().toISOString();
   ticket.events = ticket.events.concat(eventList);
 
+  saveTickets();
   showToast(`Chamado #${ticket.id} atualizado.`);
   render();
 }
