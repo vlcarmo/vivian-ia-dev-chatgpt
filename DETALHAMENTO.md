@@ -56,4 +56,4 @@ As correções foram isoladas em commits separados na branch `staging`:
 - `6278254` — `fix: persiste alterações dos chamados`
 - `7553b17` — `fix: gera ID ao abrir chamado sem registros`
 
-A branch foi criada a partir da `main`. As três correções anteriores foram integradas à `main` no commit `b1caa3c`. As duas correções adicionais desta revisão foram validadas e registradas em commit separado na branch `staging`; aguardam revisão antes de qualquer merge.
+A branch foi criada a partir da `main`. As três correções anteriores foram integradas à `main` no commit `b1caa3c`. As duas correções adicionais desta revisão foram validadas no commit `f23756a` (`fix: corrige validação e limpeza da base local`) e publicadas em `origin/staging`. Esse commit ainda não foi integrado à `main`, que permanece no commit `8dfeb59`.
